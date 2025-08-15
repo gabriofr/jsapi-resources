@@ -8,6 +8,7 @@ const config = {
   server: {
     open: true,
   },
+
 };
 
 export default defineConfig(config);

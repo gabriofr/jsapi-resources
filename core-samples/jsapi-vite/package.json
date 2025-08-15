@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "lint": "vite lint",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@arcgis/core": "~4.33.0"
+    "@arcgis/core": "^4.33.12"
   },
   "devDependencies": {
+    "typescript": "~5.8.3",
     "vite": "^7.0.4"
   }
 }

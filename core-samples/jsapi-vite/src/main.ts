@@ -1,6 +1,4 @@
 import Bookmarks from "@arcgis/core/widgets/Bookmarks";
-import BookmarksViewModel from "@arcgis/core/widgets/Bookmarks/BookmarksViewModel";
-
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
