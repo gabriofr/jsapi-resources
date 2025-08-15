@@ -8,3 +8,14 @@ body,
   height: 100%;
   width: 100%;
 }
+.esri-bookmarks__bookmark-image-container {
+  width: 14px !important;
+  height: 14px !important;
+  align-self: center;
+  vertical-align: center;
+  margin: 0 auto !important;
+  /*object-fit: cover !important;*/
+  /*background-color: #f0f0f0; !* Custom background *!*/
+  /*border-radius: 8px;*/
+  /*border: 2px solid #0078d4; !* Custom border color *!*/
+}
