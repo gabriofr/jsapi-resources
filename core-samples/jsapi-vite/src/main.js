@@ -111,6 +111,14 @@ view.ui.add(bkExpand, "top-right");
 
 // bonus - how many bookmarks in the webmap?
 view.when(() => {
+  webmap.when(() => {
+    // Combine webmap bookmarks with custom ones
+    const allBookmarks = [
+      ...customBookmarks,
+      ...(webmap.bookmarks || [])
+    ];
+    bookmarks.bookmarks = allBookmarks;
+  });
   view.graphics.add(bookmarkGraphic);
   if (webmap.bookmarks && webmap.bookmarks.length) {
     console.log("Bookmarks: ", webmap.bookmarks.length);
