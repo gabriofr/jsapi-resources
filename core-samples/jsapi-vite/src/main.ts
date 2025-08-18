@@ -1,6 +1,5 @@
 import Graphic from "@arcgis/core/Graphic";
 import Circle from "@arcgis/core/geometry/Circle";
-import Point from "@arcgis/core/geometry/Point";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
@@ -9,30 +8,7 @@ import Expand from "@arcgis/core/widgets/Expand";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 
 import "./style.css";
-
-// Adding custom bookmarks
-const customBookmarks = [
-	{
-		name: "My Location",
-		viewpoint: {
-			targetGeometry: {
-				type: "point" as const,
-				longitude: -118.805,
-				latitude: 34.027,
-				spatialReference: { wkid: 4326 },
-			},
-			scale: 5000,
-		},
-		thumbnail: {url: "/assets/marker.svg"},
-	},
-];
-
-// Create a marker for the custom bookmark
-const bookmarkPoint = new Point({
-	longitude: -118.805,
-	latitude: 34.027,
-	spatialReference: { wkid: 4326 },
-});
+import {bookmarkPoint, customBookmarks} from "./data/customBookmarks.ts";
 
 const markerSymbol = new SimpleMarkerSymbol({
   color: [226, 119, 40],
@@ -43,8 +19,8 @@ const markerSymbol = new SimpleMarkerSymbol({
 });
 
 const bookmarkGraphic = new Graphic({
-	geometry: bookmarkPoint,
-	symbol: markerSymbol,
+  geometry: bookmarkPoint,
+  symbol: markerSymbol,
 });
 
 const webmap = new WebMap({
@@ -84,7 +60,7 @@ bookmarks.on("bookmark-select", (event) => {
 		const circle = new Circle({
 			center: targetGeometry,
       radiusUnit: "meters",
-      geometry: true,
+      geodesic: true,
 			radius: 250, // meters
 			spatialReference: { wkid: 4326 },
 		});
