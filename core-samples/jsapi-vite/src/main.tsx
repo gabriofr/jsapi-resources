@@ -25,7 +25,9 @@ const customBookmarks = [
       },
       scale: 5000
     },
-    thumbnail: "https://kagi.com/proxy/31-318635_goals-clipart-best-practice-best-practices-icon-png.png?c=STv3Z44Hx98BvLYYItqJ4SKVI8BPJZ9rfKpLxdp9vFfxL8KPB5_Z_mcVYFoyKKoV0UAbPYX407useLT_-E6OJ17B3kpSpFR2S9Ce1eHfGy6gOYcoTochHPn8doG9W8iDOfJXB97fAeJcwwkrI3_HMfQh7yhAiXcpax9LNxBfMJE%3D"
+    thumbnail: {
+      url: "https://kagi.com/proxy/31-318635_goals-clipart-best-practice-best-practices-icon-png.png"
+    }
   }
 ];
 
@@ -36,7 +38,7 @@ const bookmarkPoint = new Point({
   spatialReference: { wkid: 4326 }
 });
 
-const markerSymbol = {
+const markerSymbol: __esri.SimpleMarkerSymbolProperties = {
   type: "simple-marker",
   color: [226, 119, 40], // orange
   outline: {
@@ -74,10 +76,10 @@ const bkExpand = new Expand({
 });
 
 // Draw out an area around the selected bookmark
- let areaGraphic = null;
-bookmarks.on("bookmark-select", (event) => {
+ let areaGraphic: Graphic | null = null;
+ bookmarks.on("bookmark-select", (event) => {
   // Remove old area
-  if (areaGraphic) {
+   if (areaGraphic) {
     view.graphics.remove(areaGraphic);
   }
 
