@@ -3,25 +3,26 @@
 html,
 body,
 #viewDiv {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
 }
 .esri-bookmarks__bookmark-image-container {
-  width: 14px !important;
-  height: 14px !important;
-  align-self: center;
-  vertical-align: center;
-  margin: 0 auto !important;
-  /*object-fit: cover !important;*/
-  /*background-color: #f0f0f0; !* Custom background *!*/
-  /*border-radius: 8px;*/
-  /*border: 2px solid #0078d4; !* Custom border color *!*/
+	width: 14px !important;
+	height: 14px !important;
+	align-self: center;
+	vertical-align: center;
+	margin: 0 auto !important;
+	/*object-fit: cover !important;*/
+	/*background-color: #f0f0f0; !* Custom background *!*/
+	/*border-radius: 8px;*/
+	/*border: 2px solid #0078d4; !* Custom border color *!*/
 }
-.esri-bookmarks__bookmark[aria-label="My Location"] .esri-bookmarks__bookmark-title {
-  font-family: 'Courier New', Courier, monospace !important;
-  font-size: 1.1em !important;
-  font-weight: bold !important;
-  color: #2a2a2a !important;
+.esri-bookmarks__bookmark[aria-label="My Location"]
+	.esri-bookmarks__bookmark-title {
+	font-family: "Courier New", Courier, monospace !important;
+	font-size: 1.1em !important;
+	font-weight: bold !important;
+	color: #2a2a2a !important;
 }
