@@ -1,98 +1,32 @@
-import Graphic from "@arcgis/core/Graphic";
-import Circle from "@arcgis/core/geometry/Circle";
-import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
-import MapView from "@arcgis/core/views/MapView";
-import WebMap from "@arcgis/core/WebMap";
-import Bookmarks from "@arcgis/core/widgets/Bookmarks";
-import Expand from "@arcgis/core/widgets/Expand";
-import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
-
 import "./style.css";
-import {bookmarkPoint, customBookmarks} from "./data/customBookmarks.ts";
+import Graphic from "@arcgis/core/Graphic";
+import { bookmarkPoint } from "./data/customBookmarks";
+import { markerSymbol } from "./graphics/symbols";
+import { handleBookmarkSelection } from "./handlers/bookmarksSelection";
+import { createView } from "./map/createView";
+import { createWebMap } from "./map/createWebMap";
+import { createBookmarksWidget } from "./widgets/bookmarksWidget";
 
-const markerSymbol = new SimpleMarkerSymbol({
-  color: [226, 119, 40],
-  outline: {
-    color: [255, 255, 255],
-    width: 2,
-  },
-});
+const webMap = createWebMap();
+const view = createView(webMap);
 
 const bookmarkGraphic = new Graphic({
-  geometry: bookmarkPoint,
-  symbol: markerSymbol,
+	geometry: bookmarkPoint,
+	symbol: markerSymbol,
 });
 
-const webmap = new WebMap({
-	portalItem: {
-		id: "aa1d3f80270146208328cf66d022e09c",
-	},
-});
+webMap
+	.when(() => {
+		const defaultBookmarks = webMap.bookmarks ? webMap.bookmarks.toArray() : [];
+		const { bookmarks, bkExpand } = createBookmarksWidget(
+			view,
+			defaultBookmarks,
+		);
 
-const view = new MapView({
-	container: "viewDiv",
-	map: webmap,
-});
-
-const bookmarks = new Bookmarks({
-	view,
-	bookmarks: customBookmarks,
-});
-
-const bkExpand = new Expand({
-	view,
-	content: bookmarks,
-	expanded: true,
-});
-
-// Draw out an area around the selected bookmark
-let areaGraphic: Graphic | null = null;
-bookmarks.on("bookmark-select", (event) => {
-	// Remove old area
-	if (areaGraphic) {
-		view.graphics.remove(areaGraphic);
-    areaGraphic = null;
-	}
-
-	// Get the center point from the selected bookmark
-	const { targetGeometry } = event.bookmark.viewpoint;
-	if (targetGeometry && targetGeometry?.type === "point") {
-		const circle = new Circle({
-			center: targetGeometry,
-      radiusUnit: "meters",
-      geodesic: true,
-			radius: 250, // meters
-			spatialReference: { wkid: 4326 },
-		});
-
-		const fillSymbol = new SimpleFillSymbol({
-			color: [226, 119, 40, 0.3], // semi-transparent orange
-			outline: { color: [255, 255, 255], width: 2 },
-		});
-
-		areaGraphic = new Graphic({
-			geometry: circle,
-			symbol: fillSymbol,
-		});
-
-		view.graphics.add(areaGraphic);
-	}
-});
-
-// Add the widget to the top-right corner of the view
-view.ui.add(bkExpand, "top-right");
-
-// bonus - how many bookmarks in the webmap?
-view.when(() => {
-	webmap.when(() => {
-		// Combine webmap bookmarks with custom ones
-		const allBookmarks = [...customBookmarks, ...(webmap.bookmarks || [])];
-		bookmarks.bookmarks = allBookmarks;
+		handleBookmarkSelection(bookmarks, view);
+		view.ui.add(bkExpand, "top-right");
+		view.graphics.add(bookmarkGraphic);
+	})
+	.catch((error) => {
+		console.error("Failed to load webMap:", error);
 	});
-	view.graphics.add(bookmarkGraphic);
-	if (webmap.bookmarks?.length) {
-		console.log("Bookmarks: ", webmap.bookmarks.length);
-	} else {
-		console.log("No bookmarks in this webmap.");
-	}
-});
