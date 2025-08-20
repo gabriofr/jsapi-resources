@@ -7,6 +7,19 @@ import { createView } from "./map/createView";
 import { createWebMap } from "./map/createWebMap";
 import { createBookmarksWidget } from "./widgets/bookmarksWidget";
 
+//
+// To implement a "create new bookmark" feature, you would:
+//
+//
+//   Add a UI control (e.g., button or form) to trigger bookmark creation.
+//   Let the user select a point on the map (using a map click event).
+//   Prompt the user for a bookmark title.
+//   Create a new bookmark object and add it to your bookmarks collection.
+//   Update the bookmarks widget to reflect the new bookmark.
+//
+// This involves UI work, map interaction, and updating the widget’s data source.
+//
+
 const webMap = createWebMap();
 const view = createView(webMap);
 
