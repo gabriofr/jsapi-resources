@@ -3,8 +3,6 @@ import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import Viewpoint from "@arcgis/core/Viewpoint";
 import Bookmark from "@arcgis/core/webmap/Bookmark";
 
-export type CustomBookmark = Bookmark & { uid: string };
-
 export const CustomBookmarks = (): Bookmark[] => {
 	return [
 		new Bookmark({

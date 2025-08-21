@@ -2,6 +2,20 @@
 	"files": [],
 	"references": [
 		{ "path": "./tsconfig.app.json" },
-		{ "path": "./tsconfig.node.json" }
-	]
+	],
+	"compilerOptions": {
+		"target": "ES2023",
+		"module": "ESNext",
+
+		"skipLibCheck": true,
+		"strict": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noEmit": true,
+		"noUncheckedSideEffectImports": true,
+		"moduleDetection": "force",
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": true
+	}
 }

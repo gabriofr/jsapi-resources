@@ -26,3 +26,59 @@ body,
 	font-weight: bold !important;
 	color: #2a2a2a !important;
 }
+
+.custom-bookmark-list {
+	list-style: none;
+	padding-left: 0;
+}
+.custom-bookmark-list li {
+	position: relative;
+	padding-left: 2em; /* Add space for the icon */
+}
+
+.custom-bookmark-list li::before {
+	content: "";
+	position: absolute;
+	left: 0.2em;
+	top: 0.1em;
+	width: 1.2em;
+	height: 1.2em;
+	background-image: url("/assets/marker.svg");
+	background-size: 1em 1em;
+	background-repeat: no-repeat;
+	/*background-position: center;*/
+	color: #1976d2;
+	margin-left: 0.5em;
+}
+.custom-bookmark-list a[href] {
+	padding-right: 4em;
+	text-decoration: none;
+	color: cadetblue;
+	font-weight: 600;
+}
+.custom-bookmark-list button {
+	text-align: right;
+	align-content: end;
+	align-items: end;
+}
+.bookmark-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.bookmark-actions {
+	display: flex;
+	gap: 0.5em;
+	padding-right: 1em;
+}
+.add-bookmark-container {
+	display: flex;
+	background-color: yellow;
+	align-self: end;
+}
+.bottom-row-button {
+	display: flex;
+	justify-content: end;
+	cursor: pointer;
+	padding-right: 1em;
+}
