@@ -1,14 +1,15 @@
 import "./style.css";
 import Graphic from "@arcgis/core/Graphic";
-import { bookmarkPoint } from "./data/customBookmarks";
+import { bookmarkPoint, CustomBookmarks } from "./data/customBookmarks";
 import { markerSymbol } from "./graphics/symbols";
 import { handleBookmarkSelection } from "./handlers/bookmarksSelection";
-import { createView } from "./map/createView";
+import { addCrosshairOverlay, createView } from "./map/createView";
 import { createWebMap } from "./map/createWebMap";
 import { createBookmarksWidget } from "./widgets/bookmarksWidget";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 
 const webMap = createWebMap();
+webMap.bookmarks.addMany(CustomBookmarks());
 const view = createView(webMap);
 
 const bookmarkGraphic = new Graphic({
@@ -31,3 +32,4 @@ webMap
 	.catch((error) => {
 		console.error("Failed to load webMap:", error);
 	});
+addCrosshairOverlay(view);

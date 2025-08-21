@@ -9,7 +9,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"fix": "biome check --write",
-		"typecheck": "tsc --noEmit --project tsconfig.app.json && tsc --noEmit --project tsconfig.node.json"
+		"typecheck": "tsc --noEmit --project tsconfig.json"
 	},
 	"dependencies": {
 		"@arcgis/core": "^4.33.12",
